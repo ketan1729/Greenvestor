@@ -1,0 +1,9 @@
+{% if latest_fund_list %}
+    <ul>
+    {% for fund in latest_fund_list %}
+        <li><a href="/mutualfunds/{{ question.id }}/">{{ fund.short_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No funds are available.</p>
+{% endif %}
