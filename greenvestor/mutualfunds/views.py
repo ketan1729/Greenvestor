@@ -3,6 +3,7 @@ from django.template import loader
 from django.shortcuts import get_object_or_404, render
 
 from .models import Fund
+from .insertData import insertData
 
 
 def index(request):
@@ -17,3 +18,8 @@ def index(request):
 def detail(request, fund_id):
     fund = get_object_or_404(Fund, pk=fund_id)
     return render(request, 'mutualfunds/detail.html', {'fund': fund})
+
+
+def insertRecords(request):
+    insertData()
+    return HttpResponse("Data Insertion Completed")
