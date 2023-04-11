@@ -1,9 +1,13 @@
-from django.http import HttpResponse, Http404
-from django.template import loader
-from django.shortcuts import get_object_or_404, render
+import json
 
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.template import loader
+
+from .services.insertData import insertData
+from .services.getData import getTopFundsAsPerReturns
 from .models import Fund
-from .insertData import insertData
 
 
 def index(request):
@@ -23,3 +27,8 @@ def detail(request, fund_id):
 def insertRecords(request):
     insertData()
     return HttpResponse("Data Insertion Completed")
+
+
+def getTopFundsReturns(request):
+    data = getTopFundsAsPerReturns()
+    return JsonResponse(data, safe=False)
