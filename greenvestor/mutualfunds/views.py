@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader
 
 from .services.insertData import insertData
-from .services.getData import getTopFundsAsPerReturns
+from .services.getData import *
 from .models import Fund
 
 
@@ -31,4 +31,19 @@ def insertRecords(request):
 
 def getTopFundsReturns(request):
     data = getTopFundsAsPerReturns()
+    return JsonResponse(data, safe=False)
+
+
+def getTopCategories(request):
+    data = getTopRatedCategories()
+    return JsonResponse(data, safe=False)
+
+
+def getSafeFunds(request):
+    data = getTopSafeFunds()
+    return JsonResponse(data, safe=False)
+
+
+def getUnsafeFunds(request):
+    data = getTopUnsafeFunds()
     return JsonResponse(data, safe=False)
