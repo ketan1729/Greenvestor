@@ -1,0 +1,31 @@
+{% extends "mutualfunds/base.html" %}
+
+{% block content %}
+
+<h1> Safe Funds - Sharpe Ratio </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for saf in data.safe_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{saf.fund__short_name}}</td>
+                <td>{{saf.sharpe_ratio}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% load static %}
+<img src="{% static data.base_img %}" alt="home"/>
+
+
+{% endblock content %}

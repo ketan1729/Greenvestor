@@ -1,0 +1,42 @@
+{% extends "mutualfunds/base.html" %}
+
+{% block content %}
+
+<h1> Returns </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for ret in data.returns_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{ret.id}}</td>
+                <td>{{ret.inception_date}}</td>
+<!--                <td>{{ret.investment_strategy}}</td>-->
+                <td>{{ret.long_name}}</td>
+<!--                <td>{{ret.management_bio}}</td>-->
+                <td>{{ret.management_name}}</td>
+                <td>{{ret.management_start_date}}</td>
+                <td>{{ret.short_name}}</td>
+                <td>{{ret.symbol}}</td>
+                <td>{{ret.yeartodate_return}}</td>
+                <td>{{ret.category}}</td>
+                <td>{{ret.fund_yield}}</td>
+                <td>{{ret.family}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% load static %}
+<img src="{% static data.base_img %}" alt="home"/>
+
+
+{% endblock content %}
