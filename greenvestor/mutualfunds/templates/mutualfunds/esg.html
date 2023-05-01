@@ -1,0 +1,109 @@
+{% extends "mutualfunds/base.html" %}
+
+{% block content %}
+
+<h1> ESG </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.esg_header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for esg in data.esg_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{esg.fund__short_name}}</td>
+                <td>{{esg.esg_score}}</td>
+                <td>{{esg.peer_esg_min}}</td>
+                <td>{{esg.peer_esg_avg}}</td>
+                <td>{{esg.peer_esg_max}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<br> <br>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.e_header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for env in data.e_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{env.fund__short_name}}</td>
+                <td>{{env.env_score}}</td>
+                <td>{{env.peer_env_min}}</td>
+                <td>{{env.peer_env_avg}}</td>
+                <td>{{env.peer_env_max}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<br> <br>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.s_header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for soc in data.s_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{soc.fund__short_name}}</td>
+                <td>{{soc.soc_score}}</td>
+                <td>{{soc.peer_soc_min}}</td>
+                <td>{{soc.peer_soc_avg}}</td>
+                <td>{{soc.peer_soc_max}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<br> <br>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.g_header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for gov in data.g_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{gov.fund__short_name}}</td>
+                <td>{{gov.gov_score}}</td>
+                <td>{{gov.peer_gov_min}}</td>
+                <td>{{gov.peer_gov_avg}}</td>
+                <td>{{gov.peer_gov_max}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% load static %}
+<img src="{% static data.base_img %}" alt="home"/>
+
+
+{% endblock content %}

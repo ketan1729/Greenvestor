@@ -1,0 +1,96 @@
+{% extends "mutualfunds/base.html" %}
+
+{% block content %}
+
+<h1> Assets </h1>
+<br>
+<h2> Cash Assets </h2>
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for csh in data.cash_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{csh.fund__short_name}}</td>
+                <td>{{csh.total}}</td>
+                <td>{{csh.cash}}</td>
+                <td>{{csh.stocks}}</td>
+                <td>{{csh.bonds}}</td>
+                <td>{{csh.others}}</td>
+                <td>{{csh.preferred}}</td>
+                <td>{{csh.convertible}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<br> <br>
+<h2> Stocks </h2>
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for stk in data.stock_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{stk.fund__short_name}}</td>
+                <td>{{stk.total}}</td>
+                <td>{{stk.cash}}</td>
+                <td>{{stk.stocks}}</td>
+                <td>{{stk.bonds}}</td>
+                <td>{{stk.others}}</td>
+                <td>{{stk.preferred}}</td>
+                <td>{{stk.convertible}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<br> <br>
+<h2> Bonds </h2>
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in data.header %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for bnd in data.bond_data %}
+            {% if forloop.counter < 10 %}
+            <tr>
+                <td>{{bnd.fund__short_name}}</td>
+                <td>{{bnd.total}}</td>
+                <td>{{bnd.cash}}</td>
+                <td>{{bnd.stocks}}</td>
+                <td>{{bnd.bonds}}</td>
+                <td>{{bnd.others}}</td>
+                <td>{{bnd.preferred}}</td>
+                <td>{{bnd.convertible}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% load static %}
+<img src="{% static data.base_img %}" alt="home"/>
+
+
+{% endblock content %}

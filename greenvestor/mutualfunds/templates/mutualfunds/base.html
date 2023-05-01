@@ -1,9 +1,11 @@
 <header>
   <a href="{% url 'home' %}">Home</a> |
-  <a href="{% url 'getTopFundsReturns' %}">Returns</a>
-  <a href="{% url 'getTopCategories' %}">Categories</a>
-  <a href="{% url 'getSafeFunds' %}">Safe</a>
-  <a href="{% url 'getUnsafeFunds' %}">Unsafe</a>
+  <a href="{% url 'getTopFundsReturns' %}">Returns</a> |
+  <a href="{% url 'getTopCategories' %}">Categories</a> |
+  <a href="{% url 'getSafeFunds' %}">Safe</a> |
+  <a href="{% url 'getUnsafeFunds' %}">Unsafe</a> |
+  <a href="{% url 'getESGFunds' %}">ESG</a> |
+  <a href="{% url 'getAssetFunds' %}">Assets</a>
 </header>
 
 {% block content %} {% endblock content %}

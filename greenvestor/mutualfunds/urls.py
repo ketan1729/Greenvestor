@@ -10,6 +10,8 @@ urlpatterns = [
     path('getTopCategories/', views.getTopCategories, name='getTopCategories'),
     path('getSafeFunds/', views.getSafeFunds, name='getSafeFunds'),
     path('getUnsafeFunds/', views.getUnsafeFunds, name='getUnsafeFunds'),
+    path('getESGFunds/', views.getESGFunds, name='getESGFunds'),
+    path('getAssetFunds/', views.getAssetFunds, name='getAssetFunds'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
