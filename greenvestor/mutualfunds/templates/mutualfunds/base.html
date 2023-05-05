@@ -1,3 +1,5 @@
+<h2 style="text-align: center; padding:1rem; background-color:#5560a6; color:white; margin:0; font-family: cursive;">GREENVESTOR</h2>
+
 <header>
   <a href="{% url 'home' %}">Home</a> |
   <a href="{% url 'getTopFundsReturns' %}">Returns</a> |
@@ -23,4 +25,94 @@
   .errorlist li {
       margin-bottom: 5px;
   }
+
+  header {
+    height: 30px;
+    background-color: #d9ddee;
+    padding-top: 15px;
+    box-shadow: 0px 3px 5px #cfc5c1;
+  }
+
+  header a {
+    text-decoration: none;
+    padding: 0 2rem 0 1rem;
+    font-size: 1.1rem;
+    color: #4a3434;
+    font-weight: bold;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th {
+    background-color: #555555;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  td {
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  tbody tr:first-child td {
+    border-top: none;
+  }
+
+  tfoot {
+    background-color: #dddddd;
+    font-weight: bold;
+  }
+
+  tfoot tr td {
+    padding: 8px;
+    text-align: center;
+  }
+
+  form {
+      padding: 1rem;
+      margin: 0;
+      text-align: center;
+  }
+
+  .form-element {
+      margin: 0 2rem;
+  }
+
+  form input[type=submit] {
+      background: #4fafe8;
+      color: white;
+      border: none;
+      padding: 0.5rem 0.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .home_page_contents div{
+    font-family: cursive;
+    padding: 2rem 4rem;
+    font-size: 1.1rem;
+  }
+
+  .home_page_contents .home_page_header {
+    font-family: cursive;
+    text-align: center;
+    font-size: 1.8rem;
+    padding-top: 2rem;
+  }
+
 </style>
