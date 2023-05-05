@@ -1,4 +1,4 @@
-from django.db.models import Sum, F
+from django.db.models import Sum, F, Q
 
 from ..models import *
 
@@ -68,3 +68,32 @@ def getTopAssets():
                                         "others", "preferred", "convertible")
 
     return [list(top_cash), list(top_stock), list(top_bond)]
+
+
+def getFundsComparison(funds):
+    ql = funds.split(",")
+    funds_list = []
+    for f in ql:
+        funds_list.append(f.strip())
+
+    returns_list = list(Returns.objects.select_related('fund').filter(fund__symbol__in=funds_list).exclude(value=0)
+                        .order_by("fund__symbol", "year", "quarter")
+                        .values("fund__symbol", "fund__short_name", "year", "quarter", "value"))
+
+    esg_list = list(Esg.objects.select_related('fund').filter(fund__symbol__in=funds_list).exclude(esg_score=0)
+                    .order_by("fund__symbol")
+                    .values("fund__symbol", "fund__short_name","esg_score",
+                            "peer_esg_min", "peer_esg_avg", "peer_esg_max"))
+
+    asset_list = list(Asset.objects.select_related('fund').filter(fund__symbol__in=funds_list).exclude(total=0)
+                      .order_by("fund__symbol")
+                      .values("fund__symbol", "fund__short_name", "total", "cash", "stocks", "bonds"))
+
+    other_list = list(Other.objects.select_related('fund').filter(fund__symbol__in=funds_list)
+                      .order_by("fund__symbol")
+                      .values("fund__symbol", "fund__short_name", "sharpe_ratio",
+                              "treynor_ratio", "mean_annual_return"))
+
+    ret_obj = {"returns_comp": returns_list, "esg_comp": esg_list, "asset_comp": asset_list, "other_comp": other_list}
+
+    return ret_obj

@@ -5,7 +5,22 @@
   <a href="{% url 'getSafeFunds' %}">Safe</a> |
   <a href="{% url 'getUnsafeFunds' %}">Unsafe</a> |
   <a href="{% url 'getESGFunds' %}">ESG</a> |
-  <a href="{% url 'getAssetFunds' %}">Assets</a>
+  <a href="{% url 'getAssetFunds' %}">Assets</a> |
+  <a href="{% url 'compareFunds' %}">Compare Funds</a>
 </header>
 
 {% block content %} {% endblock content %}
+
+<style>
+  .errorlist {
+    display: inline-flex;
+    color: red;
+    list-style: none;
+    margin: 0 2rem;
+    padding: 0;
+  }
+
+  .errorlist li {
+      margin-bottom: 5px;
+  }
+</style>

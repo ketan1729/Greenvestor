@@ -1,0 +1,129 @@
+{% extends "mutualfunds/base.html" %}
+
+{% block content %}
+<head>
+	<title>Comparison of Funds</title>
+	<!-- Include required libraries -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-1.54.6.min.js"></script>
+	<style>
+		/* Set the styles for the dashboard layout */
+		.container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: repeat(2, 1fr);
+			grid-gap: 1rem;
+			height: 100vh;
+			width: 100vw;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: Arial, sans-serif;
+		}
+		.grid-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: white;
+			box-shadow: 0 0 5px rgba(0,0,0,0.3);
+			padding: 1rem;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<form method="POST">
+		{% csrf_token %}
+		{{ data.form }}
+		<input type="submit" value="Compare">
+	</form>
+	{% if data.returns_plot is not None %}
+	<div class="container">
+		<!-- Add the graphs to the dashboard -->
+		<div class="grid-item" id="graph1"></div>
+		<div class="grid-item" id="graph2"></div>
+		<div class="grid-item" id="graph3"></div>
+		<div class="grid-item" id="graph4"></div>
+	</div>
+	{% endif %}
+	<!-- Add the javascript code to create the graphs -->
+	<script>
+		// First graph
+		var ret_y = {{data.returns_plot.y|safe}}
+		var ret_x = {{data.returns_plot.x|safe}}
+		var data1 = []
+		var labels_list = {{data.returns_plot.symbols|safe}}
+		for(let i = 0; i < ret_y.length; i++) {
+			let trace = {
+				x: ret_x[i],
+				y: ret_y[i],
+				mode: 'lines',
+				name: labels_list[i]
+			};
+			data1.push(trace)
+		}
+
+		var layout1 = {
+			title: "Returns Values",
+<!--			yaxis: {-->
+<!--			  range: [-0.2, 0.3]-->
+<!--			}-->
+		};
+		Plotly.newPlot('graph1', data1, layout1);
+
+		// Second graph
+		var trace2 = {
+			x: {{data.esg_plot.x|safe}},
+			y: {{data.esg_plot.y|safe}},
+			type: 'bar'
+		};
+		var data2 = [trace2];
+		var layout2 = {
+			title: 'ESG Comparison'
+		};
+		Plotly.newPlot('graph2', data2, layout2);
+
+		// Third graph
+		var trace3 = {
+			x: {{data.asset_plot.x|safe}},
+			y: {{data.asset_plot.y|safe}},
+			type: 'bar'
+		};
+		var data3 = [trace3];
+		var layout3 = {
+			title: 'Assets'
+		};
+		Plotly.newPlot('graph3', data3, layout3);
+
+		// Fourth graph
+		var trace41 = {
+		  x: {{data.other_plot.x|safe}},
+		  y: {{data.other_plot.y|safe}}[0],
+		  name: 'Sharpe Ratio'
+		};
+
+		var trace42 = {
+		  x: {{data.other_plot.x|safe}},
+		  y: {{data.other_plot.y|safe}}[1],
+		  name: 'Treynor Ratio'
+		};
+
+		var trace43 = {
+		  x: {{data.other_plot.x|safe}},
+		  y: {{data.other_plot.y|safe}}[2],
+		  name: 'Mean Annual Return'
+		};
+
+		var data = [trace41, trace42, trace43];
+
+		var layout = {
+		  barmode: 'group'
+		};
+
+		Plotly.newPlot('graph4', data, layout);
+
+    </script>
+</body>
+
+{% endblock content %}
