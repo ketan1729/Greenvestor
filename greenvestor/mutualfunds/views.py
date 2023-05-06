@@ -40,6 +40,7 @@ def insertRecords(request):
 def getTopFundsReturns(request):
     data_ret = getTopFundsAsPerReturns()
     header = list(data_ret[0].keys())
+    header.remove("id")
     # base_img = 'mutualfunds/media/OikawaPoster.jpg'
     data = {
         "returns_data": data_ret,
