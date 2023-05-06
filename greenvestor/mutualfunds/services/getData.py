@@ -14,7 +14,7 @@ def getTopFundsAsPerReturns():
 
 
 def getTopRatedCategories():
-    category_list = Fund.objects.values("category").annotate(total_return=Sum("yeartodate_return")) \
+    category_list = Fund.objects.values("category").exclude(category=0).annotate(total_return=Sum("yeartodate_return")) \
         .order_by("-total_return")
     top_categories = category_list[:limit].values("category", "total_return")
     return list(top_categories)

@@ -13,6 +13,7 @@ urlpatterns = [
     path('getESGFunds/', views.getESGFunds, name='getESGFunds'),
     path('getAssetFunds/', views.getAssetFunds, name='getAssetFunds'),
     path('compareFunds/', views.compareFunds, name='compareFunds'),
+    path('predictReturns/', views.predictReturns, name='predictReturns'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -1,19 +1,48 @@
-<h2 style="text-align: center; padding:1rem; background-color:#5560a6; color:white; margin:0; font-family: cursive;">GREENVESTOR</h2>
+<head>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-1.54.6.min.js"></script>
+</head>
 
-<header>
-  <a href="{% url 'home' %}">Home</a> |
-  <a href="{% url 'getTopFundsReturns' %}">Returns</a> |
-  <a href="{% url 'getTopCategories' %}">Categories</a> |
-  <a href="{% url 'getSafeFunds' %}">Safe</a> |
-  <a href="{% url 'getUnsafeFunds' %}">Unsafe</a> |
-  <a href="{% url 'getESGFunds' %}">ESG</a> |
-  <a href="{% url 'getAssetFunds' %}">Assets</a> |
-  <a href="{% url 'compareFunds' %}">Compare Funds</a>
-</header>
+<h1 style="padding:1rem; background-color:#989fcb; margin:0; font-family: cursive;">GREENVESTOR</h1>
+<!--#5560a6-->
+<div style="display:flex; height: 100%;">
+  <header class="nav-bar">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'getTopFundsReturns' %}">Returns</a>
+    <a href="{% url 'getTopCategories' %}">Categories</a>
+    <a href="{% url 'getSafeFunds' %}">Safe</a>
+    <a href="{% url 'getUnsafeFunds' %}">Unsafe</a>
+    <a href="{% url 'getESGFunds' %}">ESG</a>
+    <a href="{% url 'getAssetFunds' %}">Assets</a>
+    <a href="{% url 'compareFunds' %}">Compare Funds</a>
+    <a href="{% url 'predictReturns' %}">Predict Returns</a>
+  </header>
 
-{% block content %} {% endblock content %}
+  <div style="padding: 0 2rem 2rem 2rem; flex:9;">
+    {% block content %} {% endblock content %}
+  </div>
+</div>
 
 <style>
+
+  .table {
+    font-size: 1.2rem;
+  }
+
+  body{
+    margin: 0;
+  }
+
+  .nav-bar {
+    display: flex;
+    flex-direction: column;
+    background-color: #d9ddee;
+    height: 100%;
+    box-shadow: 0px 3px 5px #cfc5c1;
+    flex:1
+  }
+
   .errorlist {
     display: inline-flex;
     color: red;
@@ -26,16 +55,9 @@
       margin-bottom: 5px;
   }
 
-  header {
-    height: 30px;
-    background-color: #d9ddee;
-    padding-top: 15px;
-    box-shadow: 0px 3px 5px #cfc5c1;
-  }
-
   header a {
     text-decoration: none;
-    padding: 0 2rem 0 1rem;
+    padding: 1.5rem;
     font-size: 1.1rem;
     color: #4a3434;
     font-weight: bold;
@@ -113,6 +135,28 @@
     text-align: center;
     font-size: 1.8rem;
     padding-top: 2rem;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1rem;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  .grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+<!--    padding: 1rem;-->
+    box-sizing: border-box;
   }
 
 </style>

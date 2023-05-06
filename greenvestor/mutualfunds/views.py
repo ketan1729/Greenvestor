@@ -10,9 +10,11 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader
 
 from .services.insertData import insertData
+from .services.predictData import getPrediction
 from .services.getData import *
 from .models import Fund
 from .forms.comparefunds import CompareFundsForm
+from .forms.predictreturns import PredictReturnsForm
 
 
 def index(request):
@@ -186,3 +188,23 @@ def compareFunds(request):
             "form": compare_funds_form
         }
     return render(request, 'mutualfunds/comparefunds.html', {'data': comp_obj})
+
+
+def predictReturns(request):
+    fund = ""
+    data = {}
+
+    if request.method == "POST":
+        predict_returns_form = PredictReturnsForm(request.POST)
+        data["form"] = predict_returns_form
+
+        if predict_returns_form.is_valid():
+            fund = predict_returns_form.data["fund"]
+            base_img = getPrediction(fund)
+            data["base_img"] = base_img
+    else:
+        predict_returns_form = PredictReturnsForm()
+        data = {
+            "form": predict_returns_form
+        }
+    return render(request, 'mutualfunds/predictreturns.html', {'data': data})
